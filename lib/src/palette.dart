@@ -79,6 +79,7 @@ class HSVWithHueColorPainter extends CustomPainter {
       Paint()
         ..color = pointerColor ?? (useWhiteForeground(hsvColor.toColor()) ? Colors.white : Colors.black)
         ..strokeWidth = 1.5
+        ..blendMode = BlendMode.luminosity
         ..style = PaintingStyle.stroke,
     );
   }
@@ -896,14 +897,14 @@ class _ColorPickerLabelState extends State<ColorPickerLabel> {
                   children: <Widget>[
                     Text(
                       item,
-                      style: widget.textStyle ?? Theme.of(context).textTheme.bodyText1,
+                      style: widget.textStyle ?? Theme.of(context).textTheme.bodyLarge,
                     ),
                     const SizedBox(height: 10.0),
                     Expanded(
                       child: Text(
                         colorValue(widget.hsvColor, _colorType)[_colorTypes[_colorType]!.indexOf(item)],
                         overflow: TextOverflow.ellipsis,
-                        style: widget.textStyle ?? Theme.of(context).textTheme.bodyText2,
+                        style: widget.textStyle ?? Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),
                   ],
@@ -979,10 +980,10 @@ class _ColorPickerInputState extends State<ColorPickerInput> {
     return Padding(
       padding: const EdgeInsets.only(top: 5.0),
       child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        if (!widget.embeddedText) Text('Hex', style: Theme.of(context).textTheme.bodyText1),
+        if (!widget.embeddedText) Text('Hex', style: Theme.of(context).textTheme.bodyLarge),
         const SizedBox(width: 10),
         SizedBox(
-          width: (Theme.of(context).textTheme.bodyText2?.fontSize ?? 14) * 10,
+          width: (Theme.of(context).textTheme.bodyMedium?.fontSize ?? 14) * 10,
           child: TextField(
             enabled: !widget.disable,
             controller: textEditingController,
